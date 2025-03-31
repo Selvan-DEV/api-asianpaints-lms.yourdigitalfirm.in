@@ -11,5 +11,6 @@ router.post('/topic-status-update', userController.topicStatusUpdate);
 router.post('/start-assessment', userController.startAssessment);
 router.post('/submit-assessment', userController.submitAssessment);
 router.get('/:userId/assessment/:assessmentId', userController.getAssessmentResult);
+router.get('/users-test-api', userController.testAPI);
 
 module.exports = router;

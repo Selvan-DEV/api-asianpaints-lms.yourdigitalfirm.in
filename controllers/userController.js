@@ -168,3 +168,17 @@ exports.getAssessmentResult = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 }
+
+exports.testAPI = async (req, res) => {
+  try {
+
+    const payload = {
+      name: "selvan"
+    }
+
+    res.status(200).json(payload);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
