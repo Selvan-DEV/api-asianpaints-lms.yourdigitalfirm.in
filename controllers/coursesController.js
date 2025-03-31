@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 exports.coursesList = async (req, res) => {
   try {
-    const userId = req.params;
+    const { userId } = req.params;
     const coursesList = await Courses.getCourses();
     const coursesWithUserData = await Promise.all(coursesList.map(async (item) => {
       const userCourse = await User.getUserStartedCourses(userId, item.courseId);
