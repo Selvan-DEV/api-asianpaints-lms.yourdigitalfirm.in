@@ -1,5 +1,4 @@
 const User = require('../models/userModel');
-const topicsModel = require('../models/topicsModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -169,16 +168,34 @@ exports.getAssessmentResult = async (req, res) => {
   }
 }
 
-exports.testAPI = async (req, res) => {
-  try {
+exports.forgotPassword = async (req, res) => {
+  const { email, confirmPassword, newPassword } = req.body;
 
-    const payload = {
-      name: "selvan"
+  if (!email || !confirmPassword || !newPassword) {
+    return res.status(400).json({ message: 'Email, old password, and new password are required' });
+  }
+
+  try {
+    // Find the user by email
+    const user = await User.findByEmail(email);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json(payload);
+    // Encrypt the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password
+    const response = await User.updatePassword(user.userId, hashedPassword);
+    if (response && response.affectedRows) {
+      return res.status(200).json({ message: 'Password updated successfully' });
+    } else {
+      return res.status(400).json({ message: "Faild to change the password" })
+    }
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};

@@ -1,11 +1,11 @@
 const express = require('express');
 const topicsController = require('../controllers/topicsController');
 const router = express.Router();
+const authMiddleware = require('../middlewares/authMiddleware');
 
-
-router.get('/', topicsController.topics);
-router.get('/:topicId', topicsController.topic);
-router.get('/:topicId/content', topicsController.content);
-router.get('/:topicId/assessment', topicsController.assessment);
+router.get('/', authMiddleware, topicsController.topics);
+router.get('/:topicId', authMiddleware, topicsController.topic);
+router.get('/:topicId/content', authMiddleware, topicsController.content);
+router.get('/:topicId/assessment', authMiddleware, topicsController.assessment);
 
 module.exports = router;

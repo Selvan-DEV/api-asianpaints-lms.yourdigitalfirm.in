@@ -101,6 +101,16 @@ class User {
     const [rows] = await db.query(`SELECT assessmentId FROM assessments WHERE courseId = ?`, [courseId]);
     return rows[0];
   }
+
+  static async findByEmail(email) {
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    return rows[0];
+  }
+
+  static async updatePassword(userId, hashedPassword) {
+    const [result] = await db.query('UPDATE users SET password = ? WHERE userId = ?', [hashedPassword, userId]);
+    return result;
+  }
 }
 
 module.exports = User;

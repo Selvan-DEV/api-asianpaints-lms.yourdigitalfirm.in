@@ -6,11 +6,11 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/register', userController.registerUser);
 router.post('/login', userController.loginUser);
-router.post('/start-topic', userController.startTopic);
-router.post('/topic-status-update', userController.topicStatusUpdate);
-router.post('/start-assessment', userController.startAssessment);
-router.post('/submit-assessment', userController.submitAssessment);
-router.get('/:userId/assessment/:assessmentId', userController.getAssessmentResult);
-router.get('/users-test-api', userController.testAPI);
+router.post('/forgot-password', userController.forgotPassword);
+router.post('/start-topic', authMiddleware, userController.startTopic);
+router.post('/topic-status-update', authMiddleware, userController.topicStatusUpdate);
+router.post('/start-assessment', authMiddleware, userController.startAssessment);
+router.post('/submit-assessment', authMiddleware, userController.submitAssessment);
+router.get('/:userId/assessment/:assessmentId', authMiddleware, userController.getAssessmentResult);
 
 module.exports = router;

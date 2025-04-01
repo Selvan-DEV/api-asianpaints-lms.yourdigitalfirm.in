@@ -24,7 +24,6 @@ exports.coursesList = async (req, res) => {
 
 exports.topics = async (req, res) => {
   try {
-
     const { courseId } = req.params;
 
     if (!courseId) {
@@ -36,7 +35,7 @@ exports.topics = async (req, res) => {
       const assessment = await User.getUserAssessmentByCourseId(item.courseId);
       return {
         ...item,
-        assessmentId: assessment.assessmentId
+        assessmentId: assessment ? assessment.assessmentId : null
       };
     }));
 
