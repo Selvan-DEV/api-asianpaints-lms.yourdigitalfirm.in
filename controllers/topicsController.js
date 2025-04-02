@@ -70,39 +70,3 @@ exports.assessment = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-
-exports.docProxy = async (req, res) => {
-  try {
-
-    const { id } = req.params;
-
-
-
-    if (!id) {
-      return res.status(400).json({ message: 'ID is required' });
-    }
-
-    const URL = await topicsModel.getDocURL(id);
-    console.log(URL, 'URL');
-
-    if (!URL) {
-      res.status(400).json({ message: "URL Not Found" });
-    }
-
-    const response = await axios({
-      url: URL.docURL,
-      method: 'GET',
-      responseType: 'arraybuffer',
-      headers: { 'Origin': '*' },
-    });
-
-    console.log(response, 'response');
-    res.setHeader('Content-Type', 'application/pdf');
-    res.send(response.data);
-
-  } catch (error) {
-    console.error('Error fetching PDF:', error.response ? error.response.data : error.message);
-    res.status(500).json({ message: 'Failed to fetch PDF' });
-  }
-};

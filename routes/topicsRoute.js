@@ -7,6 +7,5 @@ router.get('/', authMiddleware, topicsController.topics);
 router.get('/:topicId', authMiddleware, topicsController.topic);
 router.get('/:topicId/content', authMiddleware, topicsController.content);
 router.get('/:topicId/assessment', authMiddleware, topicsController.assessment);
-router.get('/:id/doc-proxy', topicsController.docProxy);
 
 module.exports = router;
