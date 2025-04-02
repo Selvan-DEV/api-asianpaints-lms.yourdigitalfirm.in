@@ -25,6 +25,11 @@ class topics {
     const [rows] = await db.query(`SELECT * FROM questions WHERE assessmentId = ?`, [assessmentId]);
     return rows;
   }
+
+  static async getDocURL(id) {
+    const [rows] = await db.query(`SELECT docURL FROM content WHERE contentId = ?`, [id]);
+    return rows[0];
+  }
 }
 
 module.exports = topics;
