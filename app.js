@@ -12,7 +12,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Enable CORS for all origins (be cautious with this in production)
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  credentials: true,
+}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
