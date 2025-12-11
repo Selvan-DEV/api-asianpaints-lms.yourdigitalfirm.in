@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 //   host: 'localhost',
 //   user: 'root',
 //   password: '',
-//   database: 'tutorial-app-db'
+//   database: 'asian_paints'
 // });
 
 // const pool = mysql.createPool({
@@ -17,9 +17,9 @@ const mysql = require('mysql2');
 
 const pool = mysql.createPool({
   host: '89.116.21.79',
-  user: 'root',
-  password: 'Nilaash@2020',
-  database: 'asianpaints_db',
+  user: 'admin',
+  password: '@Gt5k(HvcAs+KXCiX&JI',
+  database: 'app_db',
   port: 3306
 });
 
