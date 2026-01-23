@@ -7,7 +7,7 @@ class courses {
   }
 
   static async getTopicsByCourseId(courseId) {
-    const [rows] = await db.query(`SELECT * FROM topics WHERE courseId = ?`, [courseId]);
+    const [rows] = await db.query(`SELECT * FROM topics WHERE courseId = ? order by orderNumber desc`, [courseId]);
     return rows;
   }
 
